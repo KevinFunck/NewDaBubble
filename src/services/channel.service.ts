@@ -246,9 +246,9 @@ export class ChannelService {
    * Add all deafault channels to the user
    */
   async addDefaultChannels() {
-    const allgemeinChannelID = '9est2kCJ45ZFKDuy8ry1'
+    const allgemeinChannelID = 'edRp0itnz76Y7viAjWYZ'
     const officeChannelID = 'NEiKXyQjwWZUgTFJ2yjn'
-    const entwicklerChannelID = 'wC4dtx6hGd37AgEC0ZXO'
+    const entwicklerChannelID = 'C8GflKQ62BIWZkYOPjGB'
     this.addUserToChannel(allgemeinChannelID)
     this.addUserToChannel(officeChannelID)
     this.addUserToChannel(entwicklerChannelID)
