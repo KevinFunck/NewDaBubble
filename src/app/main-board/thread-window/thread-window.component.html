@@ -1,0 +1,215 @@
+<div id="threat" class="threat-container">
+  <!--it´s the window for chat messages-->
+  <div class="thread-chat-content">
+    <!--Navbar  -->
+    <div class="chat-navbar">
+      <div class="position-title-thema">
+        <h2>Thread</h2>
+        <span># {{ channelService.channelName }}</span>
+      </div>
+      <img (click)="closeThread()" src="assets/img/close.png" />
+    </div>
+    <!--chat-->
+    <!-- Question  -->
+    <div class="thread">
+      <div class="container-question-message">
+        <div class="post-container">
+          <img
+            class="profileImg"
+            src="{{ this.threadService.threadUserImg }}"
+          />
+          <div class="chat">
+            <div class="position-name-time">
+              <h3 >
+                
+                {{ threadService.threadChatloginName }}
+              </h3>
+              <span
+                >{{ threadService.threadChatTime | date : "HH:mm" }}Uhr</span
+              >
+            </div>
+            <div class="questions-container">
+              <span class="question-channel text-question">{{
+                threadService.threadChatText
+              }}</span>
+              <div
+                class="threadImage"
+                *ngIf="threadService.threadChatImage.length > 8"
+              >
+                <img [src]="threadService.threadChatImage" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-many-answers">
+        <span>{{ threadService.threadList.length }} Antworten</span>
+        <div class="line"></div>
+      </div>
+
+      <!-- Answers -->
+
+      <div class="answers-container">
+        <div
+          class="container-question-message"
+          *ngFor="let chat of threadService.getAnswer(); let i = index"
+          style="flex-direction: column"
+        >
+          <div   [class.mirrorReact]="chat.mail === authService.currentUser.email" class="reaction-area" (click)="onEvent($event)">
+            <div
+              (click)="this.emojiService.addThumpUp(chat.elementID, 'thread')"
+              class="reaction-icons"
+            >
+              👍
+            </div>
+            <div
+              (click)="this.emojiService.addHacker(chat.elementID, 'thread')"
+              class="reaction-icons"
+            >
+              👨‍💻
+            </div>
+            <mat-icon class="reaction-icons" (click)="toggleEmojiPicker(chat)"
+              >add_reaction</mat-icon
+            >
+            <mat-icon *ngIf="chat.mail === authService.auth.currentUser?.email" class="reaction-icons" [matMenuTriggerFor]="menu"
+              >more_vert</mat-icon
+            >
+            <mat-menu #menu="matMenu">
+              <button (click)="setEditChat(chat, i)" mat-menu-item>
+                Nachricht bearbeiten
+              </button>
+            </mat-menu>
+          </div>
+
+          <div
+            [class.mirrorUser]="chat.mail === authService.currentUser.email"
+            class="post-container"
+          >
+            <img
+            [class.mr32]="chat.mail === authService.currentUser.email"
+              *ngIf="!chat.editOpen"
+              class="profileImg"
+              [src]="chat.profileImg"
+            />
+            <div class="chat">
+              <div
+                [class.rowRewerse]="chat.mail === authService.currentUser.email"
+                class="position-name-time"
+              >
+                <h3
+                  class="log-in-name"
+                  (click)="
+                    showProfil(chat.loginName, chat.mail, chat.profileImg, chat)
+                  "
+                >
+                  {{ chat.loginName }}
+                </h3>
+                <span class="time-thread"
+                  >{{ chat.time | date : "HH:mm" }}Uhr</span
+                >&nbsp;
+              </div>
+              <emoji-mart
+                (click)="onEvent($event)"
+                (click)="closeEmojiFieldReaction()"
+                class="emoji-mart"
+                *ngIf="chat.showEmojiPicker"
+                (emojiSelect)="addEmoji($event, chat.elementID)"
+                title="Choose your emoji"
+              >
+              </emoji-mart>
+              <div  [class.flexEnd]="chat.mail === authService.currentUser.email" class="answer-container">
+                <div
+                  [class.mirrorBubble]="
+                    chat.mail === authService.currentUser.email
+                  "
+                  *ngIf="!chat.editOpen"
+                  class="question-channel"
+                >
+                  <div [class.font-white]="chat.mail === authService.currentUser.email" class="text-thread">{{ chat.threadAreaInput }}</div>
+                  <div *ngIf="chat.threadImage.length > 8" class="threadImage">
+                    <img [src]="chat.threadImage" />
+                  </div>
+                </div>
+                <div *ngIf="chat.editOpen" class="editDiv">
+                  <textarea
+                    (click)="dontclose($event)"
+                    type="text"
+                    [(ngModel)]="newText[i]"
+                  ></textarea>
+                  <div
+                    (click)="dontclose($event)"
+                    class="button-edit-container"
+                  >
+                    <button
+                      [ngClass]="{
+                        'disabled-btn': newText[i] == '',
+                        'purple1-btn': newText[i] != ''
+                      }"
+                      class="main-btn"
+                      style="min-width: 100px"
+                      [disabled]="newText[i] == ''"
+                      (click)="EditChat(chat, chat.elementID, i); dontclose($event)"
+                    >
+                      Save
+                    </button>
+                    <button
+                      class="main-btn purple-btn"
+                      style="min-width: 100px"
+                      (click)="noEditChat(i, chat); dontclose($event)"
+                    >
+                      Abbrechen
+                    </button>
+                  </div>
+                </div>
+
+                <div class="hidden-content-message">
+                  <ng-container
+                    class="emoji-container"
+                    *ngFor="let emoji of chat.emoji; let i = index"
+                  >
+                    <div class="emoji-frame">
+                      <div class="reactions">
+                        <div class="emoji">{{ emoji["type"] }}</div>
+                        <span *ngIf="chat?.emoji.length > 0" class="reacted">{{
+                          authService.getUSerByEmail(
+                            chat?.emoji[i]["likerMail"][
+                              chat?.emoji[i]["likerMail"].length - 1
+                            ]
+                          ).name
+                        }}</span>
+                        <span
+                          *ngIf="chat?.emoji[i]['amount'] === 1"
+                          class="reagiert"
+                          >hat reagiert</span
+                        >
+                        <span
+                          *ngIf="chat?.emoji[i]['amount'] > 1"
+                          class="reagiert"
+                          >und {{ emoji["amount"] - 1 }} weitere Personen haben
+                          reagiert</span
+                        >
+                      </div>
+                      <div
+                        class="emojis"
+                        (click)="dontclose($event)"
+                        (click)="emojiAmountUp(emoji, chat.elementID, i)"
+                      >
+                        <div>{{ emoji["type"] }}</div>
+                        <div>{{ emoji["amount"] }}</div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--it´s the window for texting your message -->
+    <div (click)="dontclose($event)" class="chat-tastatur">
+      <app-thread-message-field></app-thread-message-field>
+    </div>
+  </div>
+</div>

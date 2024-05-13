@@ -1,0 +1,88 @@
+<div class="login-container">
+  <app-header></app-header>
+  <div id="mobile-header">
+    <a style="text-decoration: none; color: black" routerLink="/singup"
+      ><app-logo></app-logo
+    ></a>
+  </div>
+  <mat-card>
+    <button routerLink="/createaccount" class="arrow-back-btn">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-card-header>
+      <h2>Wähle deinen Avatar</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container">
+        <div class="avatar-container">
+          <img
+            class="profile-img"
+            [src]="storageService.imageUrl || storageService.defaultImageUrl"
+            alt=""
+            id="profile-img"
+            *ngIf="!storageService.imageUrl"
+            #profileImg
+            (click)="fileInput.click(); avatarUrl = ''"
+          />
+          <img
+            class="profile-img"
+            [src]="storageService.imageUrl"
+            *ngIf="storageService.imageUrl"
+            alt="Bild"
+            #profileImg
+            (click)="fileInput.click(); avatarUrl = ''"
+          />
+          <span id="name">{{username}}</span>
+        </div>
+
+        <div class="avatar-picker">
+          <span class="nunito20px">Aus der Liste wählen</span>
+          <div>
+            <img
+              *ngFor="let image of avatarImages; let i = index"
+              class="avatar"
+              id="avatar{{ i }}"
+              [src]="image"
+              (click)="selectAvatar(image)"
+            />
+          </div>
+        </div>
+
+        <div class="upload-container">
+          <span class="nunito20px">eigenes Bild verwenden</span>
+          <input
+            type="file"
+            (change)="storageService.selectFile($event, '')"
+            accept="image/*"
+            style="display: none"
+            #fileInput
+          />
+          <button
+            class="main-btn white-btn"
+            (click)="fileInput.click()"
+            accept="image/jpeg, image/png"
+          >
+            Datei hochladen
+          </button>
+        </div>
+
+        <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+      </div>
+      <ng-container *ngIf="isDisabled; else elseTemplate">
+        <button class="main-btn disabled-btn">Anmelden</button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <button
+          type="submit"
+          class="main-btn purple1-btn"
+          (click)="createAccount()"
+        >
+          Anmelden
+        </button>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+
+  <app-footer></app-footer>
+</div>
+<app-popup-msg [@openClose]="isOpen ? 'open' : 'closed'"></app-popup-msg>

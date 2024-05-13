@@ -1,0 +1,306 @@
+<div class="container-all-chat-content">
+  <div class="chat-navbar">
+    <div
+      *ngIf="channelService.channelName"
+      (click)="openEditChannel()"
+      class="chanel-arrow"
+    >
+      <h2># {{ channelService.channelName }}</h2>
+      <mat-icon class="icon-arrow-down">keyboard_arrow_down</mat-icon>
+    </div>
+    <div *ngIf="channelService.channelName" class="user-add">
+      <div (click)="openUserList()" class="center-objects">
+        <img
+          [ngStyle]="{ 'border-radius.px': 50 }"
+          style="width: 45px; height: 45px"
+          *ngIf="channelService.channelProfileImagesList.length > 4"
+          class="profileimges"
+          src="assets/img/moreImages.png"
+        />
+        <img
+          [ngStyle]="{ 'margin-left.px': -15, 'border-radius.px': 50, }"
+          *ngFor="
+            let userImg of channelService.channelProfileImagesList.slice(0, 4)
+          "
+          class="profileimges"
+          src="{{ userImg }}"
+          alt=""
+        />
+
+        <span>{{ channelService.channelUserAmount }}</span>
+      </div>
+      <img
+        (mouseenter)="changeSrcOnHover(true)"
+        (mouseleave)="changeSrcOnHover(false)"
+        (click)="openAddUserdialog()"
+        class="add-user-button"
+        [src]="
+          !isHovered
+            ? 'assets/img/add_user.png'
+            : 'assets/img/add_user_hover.png'
+        "
+      />
+    </div>
+  </div>
+  <div
+    *ngIf="!channelService.channelName"
+    class="chat-container"
+    style="align-items: center; justify-content: center"
+  >
+    <div class="info-text">
+      <h2>Wilkommen bei DABubble</h2>
+      <p>
+        Such dir <b>links</b> in der Liste einen <b>Channel</b> aus um
+        loszulegen. Du kannst dir auch deinen ganz eigenen
+        <b>Channel erstellen</b> und Leute darin einladen. Oder schreib ihnen
+        direkt eine <b>Nachricht</b>.
+      </p>
+      <h3>Wir wünschen dir viel Spaß beim ausprobieren.</h3>
+    </div>
+  </div>
+  <div *ngIf="channelService.channelName" class="chat-container">
+    <!--Navbar-->
+    <div class="chat-container-inside">
+      <div id="chat-container">
+        <!--question message-->
+        <div    class="container-question-message"
+          (click)="threadService.setCurrentChat(chat.id)"
+          (click)="
+            openThreadChat(
+              chat.id,
+              chat.textAreaInput,
+              chat.loginName,
+              chat.time,
+              chat.mail,
+              chat.profileImg,
+              chat.chatImage
+            )
+          "
+       
+          *ngFor="let chat of chatService.getChats(); let i = index"
+        >
+          <div class="date-line">
+            <span *ngIf="chat.time">{{
+              chatService.formatDate(chat.time)
+            }}</span>
+          </div>
+
+          <div
+            class="message-div"
+            [class.mirrorUser]="chat.mail === authService.currentUser.email"
+          >
+            <img class="message-img" src="{{ chat.profileImg }}" />
+            <div
+              style="margin-left: 30px; width: 100%"
+              [class.mirrorUser-div]="
+                chat.mail === authService.currentUser.email
+              "
+            >
+              <div
+                *ngIf="!chat.editOpen"
+                class="position-name-time"
+                [class.rowRewerse]="chat.mail === authService.currentUser.email"
+              >
+                <h3
+                  (click)="
+                    showProfil(chat.loginName, chat.mail, chat.profileImg)
+                  "
+                >
+                  {{ chat.loginName }}
+                </h3>
+                <span class="time">{{ chat.time | date : "HH:mm" }}Uhr</span
+                >&nbsp;
+              </div>
+              <div
+                [class.mirrorBubble]="
+                  chat.mail === authService.currentUser.email
+                "
+                *ngIf="!chat.editOpen"
+                class="question-channel"
+              >
+                <span
+                  class="textAreaInput"
+                  [class.font-white]="
+                    chat.mail === authService.currentUser.email
+                  "
+                  >{{ chat.textAreaInput }}</span
+                >
+                <div class="chatImage">
+                  <img
+                    *ngIf="chat.chatImage.length > 8"
+                    [src]="chat.chatImage"
+                  />
+                </div>
+              </div>
+              <div *ngIf="chat.editOpen" class="editDiv">
+                <textarea
+                  (click)="dontclose($event)"
+                  type="text"
+                  [(ngModel)]="newText[i]"
+                ></textarea>
+                <div (click)="dontclose($event)" class="button-edit-container">
+                  <button
+                    [ngClass]="{
+                      'disabled-btn': newText[i] == '',
+                      'purple1-btn': newText[i] != ''
+                    }"
+                    class="main-btn"
+                    [disabled]="newText[i] == ''"
+                    (click)="EditChat(chat, chat.id, i); dontclose($event)"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="main-btn purple-btn"
+                    (click)="noEditChat(i, chat); dontclose($event)"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="!chat.editOpen" class="answers nunito">
+                <div
+                  class="nunito aswer-count"
+                  (click)="
+                    openThreadChat(
+                      chat.id,
+                      chat.textAreaInput,
+                      chat.loginName,
+                      chat.time,
+                      chat.mail,
+                      chat.profileImg,
+                      chat.chatImage
+                    )
+                  "
+                >
+                  <h3 class="nunito answer">
+                    {{ getAnswerCount(chat.id) }}&nbsp;
+                  </h3>
+                  <h3
+                    class="nunito answer"
+                    *ngIf="getAnswerCount(chat.id) == 1"
+                  >
+                    Antwort
+                  </h3>
+                  <h3
+                    class="nunito answers"
+                    *ngIf="getAnswerCount(chat.id) != 1"
+                  >
+                    Antworten
+                  </h3>
+                </div>
+                <span class="last-answer" *ngIf="getlastAnswerTime(chat.id)"
+                  >Letzte Antwort
+                  {{ getlastAnswerTime(chat.id) | date : "HH:mm" }}
+                </span>
+
+                <ng-container *ngFor="let emoji of chat.emoji; let i = index">
+                  <div>
+                    <div class="login-name d-none">
+                      <span>{{ emoji["type"] }}</span>
+                      {{ chat.loginName }}
+                    </div>
+                    <div class="emoji-frame">
+                      <div class="reactions">
+                        <div class="emoji">{{ emoji["type"] }}</div>
+                        <span *ngIf="chat?.emoji.length > 0" class="reacted">{{
+                          authService.getUSerByEmail(
+                            chat?.emoji[i]["likerMail"][
+                              chat?.emoji[i]["likerMail"].length - 1
+                            ]
+                          ).name
+                        }}</span>
+                        <span
+                          *ngIf="chat?.emoji[i]['amount'] === 1"
+                          class="reagiert"
+                          >hat reagiert</span
+                        >
+                        <span
+                          *ngIf="chat?.emoji[i]['amount'] > 1"
+                          class="reagiert"
+                          >und {{ emoji["amount"] - 1 }} weitere Personen haben
+                          reagiert</span
+                        >
+                      </div>
+                      <div
+                        class="emojis"
+                        (click)="dontclose($event)"
+                        (click)="emojiAmountUp(emoji, chat.id, i)"
+                      >
+                        <div class="position-emoji-amount">
+                          <div style="padding-right: 5px">
+                            {{ emoji["type"] }}
+                          </div>
+                          {{ emoji["amount"] }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div
+            class="reaction-area"
+            [class.mirrorReact]="chat.mail === authService.currentUser.email"
+            (click)="onEvent($event)"
+          >
+            <div class="icons-container">
+              <div
+                (click)="this.emojiService.addThumpUp(chat.id, 'chat')"
+                class="reaction-icons"
+              >
+                👍
+              </div>
+              <div
+                (click)="this.emojiService.addHacker(chat.id, 'chat')"
+                class="reaction-icons"
+              >
+                👨‍💻
+              </div>
+              <mat-icon (click)="toggleEmojiPicker(chat)" class="reaction-icons"
+                >add_reaction</mat-icon
+              >
+              <mat-icon
+                (click)="
+                  openThreadChat(
+                    chat.id,
+                    chat.textAreaInput,
+                    chat.loginName,
+                    chat.time,
+                    chat.mail,
+                    chat.profileImg,
+                    chat.chatImage
+                  )
+                "
+                class="reaction-icons"
+                >speaker_notes</mat-icon
+              >
+              <mat-icon *ngIf="chat.mail === authService.auth.currentUser?.email" class="reaction-icons" [matMenuTriggerFor]="menu"
+                >more_vert</mat-icon
+              >
+              <mat-menu  #menu="matMenu">
+                <button (click)="setEditChat(chat, i)" mat-menu-item>
+                  Nachricht bearbeiten
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <emoji-mart
+            (click)="onEvent($event)"
+            (click)="closeEmojiFieldReaction()"
+            class="emoji-mart"
+            *ngIf="chat.showEmojiPicker"
+            (emojiSelect)="addEmoji($event, chat.id)"
+            title="Choose your emoji"
+          >
+          </emoji-mart>
+        </div>
+      </div>
+    </div>
+    <!--it´s the window for texting your message-->
+    <div (click)="dontclose($event)" class="chat-tastatur">
+      <app-message-field></app-message-field>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="header-container">
+  <app-logo
+    *ngIf="!ResponsiveService.chatOpenAndWithUnder1300px && !ResponsiveService.directMessageOpenAndWithUnder1300px  && !ResponsiveService.newMessageOpenAndWithUnder1300px && !ResponsiveService.threadOpenAndWithUnder1300px"></app-logo>
+  <div
+    *ngIf="ResponsiveService.chatOpenAndWithUnder1300px || ResponsiveService.directMessageOpenAndWithUnder1300px || ResponsiveService.newMessageOpenAndWithUnder1300px || ResponsiveService.threadOpenAndWithUnder1300px"
+    class="mobile-logo nunito">
+    <mat-icon (click)="closeChannel()">arrow_back_ios</mat-icon>
+    <img src="assets/img/logo_workspace.png" alt="">
+    <h1>Code Learning</h1>
+  </div>
+  <div (click)="closeDropDown()" *ngIf="lookingFor.length > 0" class="search-container-background"></div>
+  <div class="search-box">
+    <div class="input-container">
+      <input [(ngModel)]="lookingFor" autocomplete="off" id="search-input" placeholder="'Hauptname' dursuchen" type="text">
+      <mat-icon class="search-icon">search</mat-icon>
+    </div>
+    <div *ngIf="lookingFor.length > 0" class="search-container">
+      <div class="search-text">
+        <div>
+          <h4>Users:</h4>
+          <div class="search-type-main-div" *ngFor="let user of firestore.allUserList">
+            <div class="searching-element" (click)="
+            showProfil(user.name, user.mail, user.profileImg)" 
+            *ngIf="user.name.toLowerCase().includes(lookingFor.toLowerCase())">
+              <img class="userImg" src="{{ user.profileImg }}" />
+              <span>{{ user.name }}</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>Channels:</h4>
+          <div class="search-type-main-div" *ngFor="let Channel of channelService.channelList" (click)="channelService.getUsersImages(Channel.users)"
+            (click)="channelService.getUsersCounter(Channel.id)" (click)="channelService.getChannelName(Channel.name)"
+            (click)="channelService.getDescription(Channel.description)"
+            (click)="channelService.getUserName(Channel.users)" (click)="showChannel(Channel.id)">
+            <div class="searching-element" *ngIf="Channel.name.toLowerCase().includes(lookingFor.toLowerCase())">
+              <span>{{ Channel.name }}</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>Chats:</h4>
+          <div *ngFor="let chat of chatService.allChats">
+            <div class="chat-container"
+              *ngIf="(chat.textAreaInput?.toLowerCase().includes(lookingFor.toLowerCase())) && channelService.channelListNamesArray.includes(chat.channelName)">
+              <span class="channel-name chat-element" (click)="getChannelInformation(chat.channelID)" (click)="showChannel(chat.channelID)">[{{
+                chat.channelName }}]</span> &nbsp;
+              <span class="chat-element" (click)="
+              openThreadChat(
+                chat.id,
+                chat.textAreaInput,
+                chat.loginName,
+                chat.time,
+                chat.mail,
+                chat.profileImg,
+                chat.chatImage
+              )" (click)="getChannelInformation(chat.channelID)" (click)="showChannel(chat.channelID)">
+                *{{ chat.textAreaInput|| chat.threadAreaInput}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div (click)="openDialog()" class="user-container">
+    <span>{{authentication.auth.currentUser?.displayName}}</span>
+    <img class="avatar" [src]="authentication.auth.currentUser?.photoURL" alt="avatar">
+    <div class="dot"></div>
+    <mat-icon>expand_more</mat-icon>
+  </div>
+</div>

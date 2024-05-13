@@ -1,0 +1,29 @@
+<div class="container-profil-view nunito">
+    <div class="position-title-close-profil-view">
+        <h1>Profil</h1>
+        <img (click)="closeProfilView()" src="assets/img/close.png">
+    </div>
+
+    <div class="p">
+        <img [src]="authentication.auth.currentUser?.photoURL" alt="avatar">
+    </div>
+
+    <div>
+        <div class="user-name">
+            <h1>{{authentication.auth.currentUser?.displayName}}</h1>
+            <mat-icon (click)="openDialog()" class="edit-mat-icon" fontIcon="edit"></mat-icon>
+            <span (click)="openDialog()" >Bearbeiten</span>
+        </div>
+        <div class="position-status">
+            <div class="online-status"></div>
+            <h3>Aktiv</h3>
+        </div>
+    </div>
+
+    <div class="position-email">
+        <img src="assets/img/mail.png">
+        <h2>E-Mail-Adresse</h2>
+    </div>
+
+     <h3 class="mail">{{authentication.auth.currentUser?.email}}</h3>
+</div>

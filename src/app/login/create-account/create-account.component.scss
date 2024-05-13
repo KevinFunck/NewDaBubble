@@ -1,0 +1,73 @@
+@import "../../../styles.scss";
+@import "../../app.component.scss";
+@import "../login.component.scss";
+
+.login-container {
+  flex-direction: column;
+  gap: 16px;
+}
+
+app-header {
+  opacity: 1;
+  animation: unset;
+}
+
+mat-card {
+  @include dFlex($jc: center, $ai: center);
+  gap: 64px;
+  padding: 32px;
+  width: 606px;
+  height: 669px;
+  border-radius: 30px;
+}
+
+mat-card-content {
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+}
+
+mat-card-header {
+  position: relative;
+  @include dFlex($jc: flex-end, $ai: center);
+
+  h2 {
+    margin: 0;
+  }
+}
+
+#login-card-container {
+  gap: 18px;
+  width: 100%;
+}
+
+#inputs-container {
+  @include dFlex($jc: center, $ai: unset);
+}
+
+.checkbox-container {
+  @include dFlex($jc: unset, $ai: flex-end);
+  position: relative;
+  width: 100%;
+  border: 0;
+  margin: 16px;
+}
+
+.checkbox-validation-container {
+  position: absolute;
+  top: 36px;
+  left: 8px;
+  color: $error;
+}
+
+.main-btn {
+  align-self: flex-end;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+
+@import "../login.component-mobile.scss";
+@import "create-account.component.mobile.scss";

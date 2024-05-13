@@ -1,0 +1,37 @@
+<div class="container-all-chat-content nunito">
+    <div class="chat-container">
+        <div class="chat-navbar">
+            <div class="message-contacts">
+                <span>Neue Nachricht</span>
+                <div (click)="test()" class="div-input">
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nachricht</mat-label>
+                            <input [(ngModel)]="input" type="text" placeholder="An:#channel,@jemand"
+                                aria-label="Nachricht" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                @for (userNames of filteredOptions | async; track userNames) {
+                                <mat-option (click)="setplacetosave(userNames)"
+                                    [value]="userNames">{{userNames}}</mat-option>
+                                }
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+            <div class="take-rest-of-the-div"></div>
+        </div>
+        <div class="chat-container-inside">
+            <div id="chat-container">
+                <!-- Hier werden später die Nachrichten angezeigt-->
+            </div>
+
+        </div>
+
+    </div>
+    <!--it´s the window for texting your message-->
+    <div (click)="dontclose($event)" class="chat-tastatur">
+        <app-message-field *ngIf="sendtoChannel"></app-message-field>
+        <app-privat-message-field *ngIf="sendtoChannel == false"></app-privat-message-field>
+    </div>
+</div>

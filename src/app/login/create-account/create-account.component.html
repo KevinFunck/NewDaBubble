@@ -1,0 +1,137 @@
+<div class="login-container">
+  <app-header></app-header>
+  <div id="mobile-header">
+    <a style="text-decoration: none; color: black" routerLink="/singup"
+      ><app-logo></app-logo
+    ></a>
+  </div>
+  <mat-card>
+    <button routerLink="/singup" class="arrow-back-btn">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-card-header>
+      <h2>Konto erstellen</h2>
+      <h3>
+        Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
+        DABubble-Konto.
+      </h3>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        id="login-card-container"
+        #myForm="ngForm"
+        (ngSubmit)="onSubmit(myForm)"
+      >
+        <div id="inputs-container">
+          <div class="inputFields-container name-input-container">
+            <mat-icon fontIcon="mail_outline"></mat-icon>
+            <input
+              type="text"
+              id="name"
+              class="login-inputs"
+              name="name"
+              placeholder="Vor und Nachname"
+              [(ngModel)]="username"
+              required
+              minlength="2"
+            />
+            <div
+              *ngIf="
+                myForm.form.controls['name']?.invalid &&
+                myForm.form.controls['name']?.touched
+              "
+              class="validation-container"
+            >
+              <div>Bitte geben Sie ein Namen ein.</div>
+            </div>
+          </div>
+
+          <div class="inputFields-container email-input-container">
+            <mat-icon fontIcon="mail_outline"></mat-icon>
+            <input
+              type="email"
+              id="email"
+              class="login-inputs"
+              name="email"
+              [(ngModel)]="inputMail"
+              placeholder="beispielname@email.com"
+              email
+              required
+              minlength="5"
+              [pattern]="authService.emailRegex"
+            />
+            <div class="validation-container">
+              <div
+                *ngIf="
+                  myForm.controls['email']?.invalid &&
+                  myForm.form.controls['email']?.touched
+                "
+              >
+                Ungültige E-Mail-Adresse.
+              </div>
+            </div>
+          </div>
+
+          <div class="inputFields-container password-input-container">
+            <mat-icon fontIcon="lock_outline"></mat-icon>
+            <input
+              type="password"
+              id="password"
+              class="login-inputs"
+              placeholder="Passwort"
+              name="password"
+              [(ngModel)]="inputPassword"
+              required
+              minlength="8"
+            />
+            <div class="validation-container">
+              <div
+                *ngIf="
+                  myForm.form.controls['password']?.invalid &&
+                  myForm.form.controls['password']?.touched
+                "
+              >
+                Bitte geben Sie ein Passwort ein.<br />
+                Das Passwort muss midestens 8 Zeichen Lang sein.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkbox-container">
+          <mat-checkbox
+            checked="false"
+            type="checkbox"
+            name="datenschutz"
+            #datenschutz
+            id="datenschutz"
+            [color]="task.color"
+            class="example-margin"
+            ><span class="fs-16">Ich stimme der</span
+            ><a class="purple-link" routerLink="/dataprotection"
+              >Datenschutzerklärung</a
+            ><span class="fs-16">zu.</span>
+          </mat-checkbox>
+
+          <div class="checkbox-validation-container">
+            <div *ngIf="!datenschutz.checked && myForm.submitted">
+              Bitte akzeptiere die Datenschutzerklärung
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="datenschutz.checked && myForm.valid; else elseTemplate"
+        >
+          <button class="main-btn purple1-btn" type="submit">Anmelden</button>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <button  disabled class="main-btn disabled-btn">Anmelden</button>
+        </ng-template>
+      </form>
+      <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    </mat-card-content>
+  </mat-card>
+  <app-footer></app-footer>
+</div>

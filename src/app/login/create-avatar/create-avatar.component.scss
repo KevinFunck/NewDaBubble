@@ -1,0 +1,140 @@
+@import "../../../styles.scss";
+@import "../../app.component.scss";
+@import "../login.component.scss";
+
+:root {
+  overflow: hidden;
+}
+app-popup-msg {
+  position: absolute !important;
+  transform: translateX(0%);
+  bottom: 108px;
+}
+
+
+.login-container {
+  gap: 16px;
+}
+
+
+app-header {
+  opacity: 1;
+  animation: unset;
+}
+
+
+.mobile-header{
+  display: none;
+}
+mat-icon{
+  width: 40px;
+  height: 40px;
+}
+
+mat-card {
+  @include dFlex($jc: center, $ai: center);
+  gap: 12px;
+  padding: 32px;
+}
+
+
+mat-card-content {
+  flex-direction: column;
+  width: 90%;
+  gap: 32px;
+}
+
+
+mat-card-header {
+  position: relative;
+  display: unset;
+  height: 32px;
+  padding: 0;
+  gap: 0;
+  h2 {
+    font-size: 46px;
+    font-weight: 700;
+    color: $purple1;
+    font-family: Nunito;
+    margin: 8px;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+.avatar-container {
+  @include dFlex($jc: center, $ai: center);
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  padding: 4px;
+  border-radius: 360px;
+  gap: 10px;
+  border: 4px solid white;
+  cursor: pointer;
+  transition: ease-in-out 125ms;
+  &:hover {
+    border: 4px solid #e6e6e6;
+  }
+
+  &:focus {
+    border: 4px solid $bg-color;
+  }
+}
+
+.avatar-picker {
+  @include dFlex($jc: unset, $ai: unset);
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  & > div {
+    @include dFlex($jc: center, $ai: center);
+    gap: 8px;
+  }
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 360px;
+  border: 4px solid white;
+  padding: 4px;
+  cursor: pointer;
+  transition: ease-in-out 125ms;
+  &:hover {
+    border: 4px solid #e6e6e6;
+  }
+}
+
+#name {
+  font-family: Nunito;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 44px;
+  text-align: center;
+}
+
+.upload-container {
+  width: 100%;
+  @include dFlex($jc: unset, $ai: center);
+  gap: 24px;
+}
+
+.white-btn {
+  width: 187px !important;
+}
+
+.main-btn {
+  align-self: flex-end;
+}
+
+@import "create-avatar.component.mobile.scss";

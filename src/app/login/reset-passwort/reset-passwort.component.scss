@@ -1,0 +1,42 @@
+@import "../../../styles.scss";
+@import "../../app.component.scss";
+@import '../login.component.scss';
+
+app-header {
+  opacity: 1;
+  animation: unset
+}
+
+mat-card {
+  gap: 8px;
+  padding: 16px;
+  width: 700px;
+  height: 470px;
+}
+
+
+mat-card-content {
+  @include dFlex($jc: space-around, $ai: center);
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+mat-card-header {
+  gap: 0px !important;
+  padding: 0;
+}
+
+form{
+  width: 80%;
+}
+
+.login-inputs{
+  padding-left: 32px;
+}
+
+.main-btn{
+  align-self: flex-end;
+}
+
+@import "reset-password.component.mobile.scss";

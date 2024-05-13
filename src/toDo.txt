@@ -1,0 +1,27 @@
+
+ Abschlussarbeiten:
+
+-funktionen kommentieren, am besten ohne KI
+
+        optional:
+        
+- Thread-Option bei Direktnachrichten (4:00)
+- alle Objekte zusammenfügen (Viel Arbeit)
+- das element "letzte Antwort" bei jeder Nachricht
+- bein manchen Auflösungen ist ein scrollbalken in der y Achse eventuell entfernen
+-Wenn man eine reaction abgibt dann springt man nach oben. Ist ein wenig userunfreundlich
+- aktuell kann man noch endlos viele Emojis als Reaktion anzeigen lassen. das sollte man vielelicht auf 2-3 reduzieren. insbesondere im responsive
+
+
+Erledigt:
+
+- wenn Channels gewechselt werden, soll messagefield im Fokus sein (1:30) (Jan)
+- man kann Bilder bislang nur posten, wenn man eine NAchricht dazu schreibt (1:45) (Jan)
+- Dialog schließt sich nciht nach dem hinzufügen (Jan)
+- man kann keine Threads mehr kommentieren, weil der Send-Button nicht mehr da ist ??? (Jan)
+- Login: Konto erstellen stärker highlighten (0:00) (Jan)  
+- Wenn man seinen Namen ändert, wird nicht nachträglich der Autorname der beiträge angepasst (weiß nicht ob wir das fixen können) (1:10)
+- Login: rotes Feedback bei Anmeldung, weil beim Login eine Serverabfrage nicht funktioniert (0:40)
+- Teilnehmer hinzufügen: man kann nur einen gleichzeitig hinzufügen (2:30)
+- Messagefield: wenn man # eingibt wird nur ein channel vorgeschlagen (2:05)
+- responsive im main chat

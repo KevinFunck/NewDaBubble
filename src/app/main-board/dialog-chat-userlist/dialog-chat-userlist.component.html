@@ -1,0 +1,49 @@
+<div class="container-chat-userlist">
+  <div class="position-title-close-userlist">
+    <h1>Mitglieder</h1>
+    <div>
+      <img
+        (click)="closeChatUserlist()"
+        src="assets/img/close.svg"
+        (mouseenter)="changeSrcOnHover(true, 1)"
+        [src]="
+          isHovering
+            ? 'assets/img/closeHover.svg'
+            : 'assets/img/close.svg'
+        "
+        (mouseleave)="changeSrcOnHover(false, 1)"
+      />
+    </div>
+  </div>
+
+  <div class="position-userlist">
+    <div
+      *ngFor="
+        let userImg of channelService.channelProfileImagesList;
+        let i = index
+      "
+      (click)="openProfilView(getEmail(i))"
+      class="name-img"
+    >
+      <img class="imgs" src="{{ userImg }}" alt="avatar" />
+      <span>{{ currentChannelNames[i] }}</span>
+    </div>
+  </div>
+  <div
+    (mouseleave)="changeSrcOnHover(false, 2)"
+    (mouseenter)="changeSrcOnHover(true, 2)"
+    (click)="openAddUserinTheUserlist()"
+    class="position-add-img-text"
+  >
+    <img
+      class="add-user-button"
+      src="assets/img/add_user.png"
+      (click)="closeChatUserlist()"
+      src="assets/img/close.svg"
+      [src]="
+        isHovering2 ? 'assets/img/addUserHover.png' : 'assets/img/add_user.png'
+      "
+    />
+    <h3>Mitglieder hinzufügen</h3>
+  </div>
+</div>

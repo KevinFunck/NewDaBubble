@@ -1,0 +1,44 @@
+<div class="message-field-container">
+  <div class="input-container">
+    <textarea id="message-field-message"
+      [(ngModel)]="textAreaInput"
+      placeholder="Nachricht an #Channelname"
+    ></textarea>
+    <div class="chatImage">
+      <img [src]="storageService.privateChatImageUrl" />
+    </div>
+  </div>
+  <div class="button-container">
+    <div class="first-icon-container">
+      <mat-icon (click)="fileInput.click()" class="icon">add</mat-icon>
+      <input
+        type="file"
+        (change)="storageService.selectFile($event, 'privateChat')"
+        accept="image/*"
+        style="display: none"
+        #fileInput
+      />
+      <div class="vector"></div>
+      <mat-icon
+        (click)="
+          emojiService.isEmojiPickerVisible = !emojiService.isEmojiPickerVisible
+        "
+        class="icon"
+        >sentiment_satisfied</mat-icon
+      >
+    </div>
+    <div>
+      <mat-icon (click)="sendMessageToPrivateChat()" class="icon-send"
+        >send</mat-icon
+      >
+    </div>
+  </div>
+  <emoji-mart
+    (click)="closeEmojiField()"
+    class="emoji-mart"
+    *ngIf="emojiService.isEmojiPickerVisible"
+    (emojiSelect)="addEmoji($event)"
+    title="Choose your emoji"
+  >
+  </emoji-mart>
+</div>
