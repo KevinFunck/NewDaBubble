@@ -35,8 +35,7 @@ export class FirestoreServiceService {
 
   // Download URL for user profile image
   donwloadUrl: string = "";
-
-
+  
   constructor() {
     this.getUserID = this.subUserID(this.userMail, this.donwloadUrl);
     this.getAllUser = this.subAllUser();
@@ -52,7 +51,6 @@ export class FirestoreServiceService {
 
   }
 
-
   /**
    * Retrieves a reference to the 'users' collection in Firestore.
    * @returns A reference to the 'users' collection.
@@ -60,7 +58,6 @@ export class FirestoreServiceService {
   getUserRef() {
     return collection(this.firestore, 'users');
   }
-
 
   /**
  * Retrieves a specific user document from Firestore based on the provided document ID.
@@ -70,7 +67,6 @@ export class FirestoreServiceService {
   getUser(docID: string) {
     return doc(collection(this.firestore, 'users'), docID);
   }
-
 
   /**
  * Adds a new user to the Firestore 'users' collection.
@@ -83,7 +79,6 @@ export class FirestoreServiceService {
     return user.id
   }
 
-
   /**
    * Retrieves a user document from Firestore based on the provided document reference,
    * converts it into a User object, and sets it as the currentUser property.
@@ -95,7 +90,6 @@ export class FirestoreServiceService {
     this.currentUser = new User(user)
   }
 
-
   /**
    * Updates a user document in Firestore with the provided data object.
    * @param userDocRef The reference to the user document to update.
@@ -104,7 +98,6 @@ export class FirestoreServiceService {
   async updateUser(userDocRef: DocumentReference, object: {}) {
     await updateDoc(userDocRef, object)
   }
-
 
   /**
    * Subscribes to changes in the user list to populate the list of all users.
@@ -119,7 +112,6 @@ export class FirestoreServiceService {
     });
   }
 
-
   /**
    * Constructs a user object with specified properties, using provided values or defaults.
    * @param obj The object containing properties to include in the user object.
@@ -133,7 +125,6 @@ export class FirestoreServiceService {
       profileImg: obj.profileImg || "",
     }
   }
-
 
   /**
    * Subscribes to changes in the user list to find the user ID associated with a given email.
@@ -153,7 +144,6 @@ export class FirestoreServiceService {
     });
   }
 
-
   /**
    * Updates the profile image path for a user.
    * @param downloadUrl The URL of the new profile image.
@@ -167,7 +157,6 @@ export class FirestoreServiceService {
       })
     } 
   }
-
 
   /**
    * Sort array by the right date and time
@@ -188,7 +177,4 @@ export class FirestoreServiceService {
       }
     });
   }
-
-
-
 }

@@ -26,7 +26,6 @@ export class EmojiService {
     }
   }
 
-
   /**
   * Adds an emoji reaction to a chat message.
   * @param emoji The emoji to add as a reaction.
@@ -86,8 +85,6 @@ export class EmojiService {
       }
     });
   }
-
-
 
   /**
    * Updates the amount of an emoji reaction in a chat message.
@@ -172,7 +169,4 @@ export class EmojiService {
   addHacker(chatID: string, type: string) {
     this.addEmojiInChat("👨‍💻", chatID, type)
   }
-
-
-
 }

@@ -143,7 +143,6 @@ export class StorageService {
     return path
   }
 
-
   /**
    * Creats a path to a File in a folder
    * let pfad = createFileDirection('path') path= 'profileImages/'  
@@ -157,7 +156,6 @@ export class StorageService {
     return reference
   }
 
-
   /**
    * Uploads the file to storage
    * @param path the end Reference/Path where you want to save the File
@@ -166,7 +164,6 @@ export class StorageService {
   async uploadToStorage(path: StorageReference, file: File) {
     await uploadBytes(path, file)
   }
-
 
   /**
    * creates a donwload Url for a File in the Storage
@@ -178,7 +175,6 @@ export class StorageService {
     return storageUrl
   }
 
-
   /**
    *  creates a donwload Url for a File in the Storage like getStorageUrl. But on annother way. Choose one we will delete it later
    * @param path 
@@ -188,7 +184,6 @@ export class StorageService {
     const url = await getDownloadURL(ref(this.storage, path));
     return url;
   }
-
 
   /**
    * resets all variables
@@ -201,9 +196,7 @@ export class StorageService {
     this.editProfileImgUrl = ''
     this.storageImgUrl = ''
     this.imageReference = null
-
   }
-
 }
 
 

@@ -19,7 +19,6 @@ export class UpdateUserService {
     private chatService: ChatService
   ) { }
 
-
   inputPassword!: string;
   inputMail!: string;
   username!: string;
@@ -42,7 +41,6 @@ export class UpdateUserService {
     }
   }
 
-
   /**
   * 
   * @param user needs a userCredentail.currentUser /the user you want to change / the logged in user
@@ -54,7 +52,6 @@ export class UpdateUserService {
     await this.updatePhotoUrl(user, imgUrl)
 
   }
-
 
   /**
    * Changes the username
@@ -68,7 +65,6 @@ export class UpdateUserService {
     })
   }
 
-
   /**
    * changs photoUrl
    * @param user needs a userCredentail.currentUser /the user you want to change / the logged in user
@@ -80,7 +76,6 @@ export class UpdateUserService {
     })
   }
 
-
   /**
    * 
    * @param user needs a userCredentail.currentUser /the user you want to change / the logged in user
@@ -90,14 +85,12 @@ export class UpdateUserService {
     await updateEmail(user, email)
   }
 
-
   /**
  * delete user
  */
   deleteUser() {
     deleteUser(this.authService.auth.currentUser!)
   }
-
 
   async updateProfileImgs(chatID: string, threadID: string, privateID: string) {
     let ref
@@ -114,7 +107,6 @@ export class UpdateUserService {
       profileImg: this.authService.currentUser.photoURL
     })
   }
-
 
   /**
    * changes all profileImages in chat and thread
@@ -137,7 +129,6 @@ export class UpdateUserService {
     }
   }
 
-
   async updateChatUserName(chatID: string, threadID: string, privateID: string) {
     let ref
     if (chatID.length > 0) {
@@ -155,7 +146,6 @@ export class UpdateUserService {
     })
   }
 
-
   async changeAllUserNames(list: any[], type: string) {
     for (let i = 0; i < list.length; i++) {
       const chat = list[i];
@@ -171,10 +161,6 @@ export class UpdateUserService {
       }
     }
   }
-
-
-
-
 }
 
 

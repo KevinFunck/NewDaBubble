@@ -12,7 +12,6 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class ChannelService {
-
   channel = new Channel();
   channelID: string = ''
   channelName = '';
@@ -30,14 +29,11 @@ export class ChannelService {
   // List of profile images for channel users
   channelProfileImagesList: any = []
 
-
-
   constructor(private firestoreService: FirestoreServiceService,
     private authService: AuthenticationService
   ) {
     this.unsubchannel = this.subChannelList();
   }
-
 
   /**
  * Retrieves a reference to the 'channels' collection in Firestore.
@@ -47,7 +43,6 @@ export class ChannelService {
     return collection(this.firestoreService.firestore, 'channels');
   }
 
-
   /**
    * Retrieves a reference to the document of the current channel.
    * @returns A reference to the document of the current channel.
@@ -55,7 +50,6 @@ export class ChannelService {
   getChannelDoc() {
     return doc(collection(this.firestoreService.firestore, 'channels'), this.channelID);
   }
-
 
   /**
    * Retrieves a reference to the document of the channelid.
@@ -76,8 +70,6 @@ export class ChannelService {
   async updateChannel(channelRef: DocumentReference, object: {}) {
     await updateDoc(channelRef, object)
   }
-
-
 
   /**
    * Sets the channel name based on the provided channel ID.
@@ -115,7 +107,6 @@ export class ChannelService {
     }
   }
 
-
   /**
    * Subscribes to changes in the channel list for the current user.
    * @returns A function to unsubscribe from the snapshot listener.
@@ -125,10 +116,10 @@ export class ChannelService {
       this.channelList = [];
       this.channelListNamesArray = [];
       list.forEach(element => {
-        if (element.data()['users'].includes(this.firestoreService.currentUser?.email)) {
+        
           this.channelList.push(this.setChannelObject(element.data(), element.id));
           this.channelListNamesArray.push(element.data()['name']);
-        }
+   
       });
     })
   };
@@ -142,7 +133,6 @@ export class ChannelService {
     })
 
   }
-
 
   /**
    * Retrieves the profile images of users in the provided list and populates the channel profile images list.
@@ -160,7 +150,6 @@ export class ChannelService {
     }
   }
 
-
   async reloadImages() {
     this.channelProfileImagesList = [];
     let channelDoc = this.getChannelDoc();
@@ -170,7 +159,6 @@ export class ChannelService {
     this.getUsersImages(channelUserList);
   }
 
-
   /**
    * Retrieves the list of user profile images associated with the current channel.
    * @returns An array containing the list of user profile images.
@@ -178,7 +166,6 @@ export class ChannelService {
   getUserImagesList() {
     return this.channelProfileImagesList;
   }
-
 
   /**
    * Updates the list of users in a channel by adding a new user.
@@ -199,8 +186,6 @@ export class ChannelService {
     }
   }
 
-
-
   /**
    * Retrieves the number of users in the specified channel.
    * @param channelID The ID of the channel for which to retrieve the user count.
@@ -212,8 +197,6 @@ export class ChannelService {
       this.channelUserAmount = docSnap.data()['users'].length;
     }
   }
-
-
 
   async removeUserFormChannel() {
     const channelDoc = this.getChannelDoc();
@@ -227,7 +210,6 @@ export class ChannelService {
       }
     }
   }
-
 
   /**
    * removes the user from the channel in firabase
@@ -248,13 +230,11 @@ export class ChannelService {
   async addDefaultChannels() {
     const allgemeinChannelID = 'edRp0itnz76Y7viAjWYZ'
     const officeChannelID = 'NEiKXyQjwWZUgTFJ2yjn'
-    const entwicklerChannelID = 'C8GflKQ62BIWZkYOPjGB'
+
     this.addUserToChannel(allgemeinChannelID)
     this.addUserToChannel(officeChannelID)
-    this.addUserToChannel(entwicklerChannelID)
+    
   }
-
-
 
 /**
  * 
@@ -271,7 +251,4 @@ export class ChannelService {
       users: userData
     })
   }
- 
-
-
 }

@@ -34,7 +34,6 @@ export class ThreadService {
     this.unsubALLsubAnswer;
   }
 
-
   subThreadList() {
     this.threadList = []
     return onSnapshot(this.getThreadAnswerRef(), (list) => {
@@ -59,8 +58,6 @@ export class ThreadService {
     });
   }
 
-
-
   /**
    * Saves the thread answer to the database.
    */
@@ -74,8 +71,6 @@ export class ThreadService {
    * @param id The ID of the thread.
    * @returns A thread object with specified properties.
    */
-
-
   setThreadObject(obj: any, elementID: any) {
     return {
       elementID: elementID || "",
@@ -89,7 +84,6 @@ export class ThreadService {
       profileImg: obj.profileImg || "kein img vorhanden",
       mail: obj.mail || 'email@nichtVorhanden.de',
       threadImage: obj.threadImage || 'noImage'
-
     }
   }
 
@@ -124,6 +118,4 @@ export class ThreadService {
     this.currentChatID = chatID;
     this.subThreadList();
   }
-
-
 }

@@ -94,12 +94,12 @@ export class CreateAvatarComponent implements OnInit {
   ]
 
   private avatarImagesUrls = [
+    'gs://dabubble-1d01f.appspot.com/profileImages/avatars/female1.png',
+    'gs://dabubble-1d01f.appspot.com/profileImages/avatars/female2.png',
     'gs://dabubble-1d01f.appspot.com/profileImages/avatars/male1.png',
     'gs://dabubble-1d01f.appspot.com/profileImages/avatars/male2.png',
-    'gs://dabubble-1d01f.appspot.com/profileImages/avatars/female1.png',
     'gs://dabubble-1d01f.appspot.com/profileImages/avatars/male3.png',
-    'gs://dabubble-1d01f.appspot.com/profileImages/avatars/male4.png',
-    'gs://dabubble-1d01f.appspot.com/profileImages/avatars/female2.png',
+    'gs://dabubble-1d01f.appspot.com/profileImages/avatars/male4.png'
   ]
 
   inputPassword: string;

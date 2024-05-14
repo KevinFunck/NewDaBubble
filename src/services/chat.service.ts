@@ -23,7 +23,6 @@ export class ChatService {
     this.unsubMyChat = this.subMyChatList();
   }
 
-
   //chat
   // Initialize Chat object for general chats
   chat = new Chat();
@@ -54,7 +53,6 @@ export class ChatService {
     this.unsubMyChat;
   }
 
-
   /**
    * Retrieves a reference to the 'chat' collection in Firestore.
    * @returns A reference to the 'chat' collection.
@@ -74,8 +72,6 @@ export class ChatService {
   getThreadRef() {
     return collection(this.firestoreService.firestore, 'thread');
   }
-
-
 
   /**
    * Retrieves a specific chat document from Firestore based on the provided document ID.
@@ -99,8 +95,6 @@ export class ChatService {
     return doc(collection(this.firestoreService.firestore, 'privateChat'), docID);
   }
 
-
-
   /**
    * Retrieves a specific private chat document from Firestore based on the provided document ID.
    * @param docID The ID of the private chat document to retrieve.
@@ -117,8 +111,6 @@ export class ChatService {
     addDoc(this.firestoreService.dbChat, this.chat.toJSON());
   }
 
-
-
   /**
    * Saves a private chat to the Firestore database.
    */
@@ -134,7 +126,6 @@ export class ChatService {
         return updateDoc(docToUpdate, updateData);
       })
   }
-
 
   /**
    * Sets the current contact user and subscribes to the private chat list.
@@ -212,6 +203,7 @@ export class ChatService {
       this.chatList = this.firestoreService.sortArray(this.chatList)
     })
   }
+
   /**
   * Constructs a chat object with specified properties, using provided values or defaults.
   * @param obj The object containing properties to include in the chat object.
@@ -293,9 +285,6 @@ export class ChatService {
     }
   }
 
-
-
-
   formatDate(chatDate: number): string {
 
     const chatDateObject = new Date(chatDate);
@@ -320,7 +309,6 @@ export class ChatService {
       return `${dayOfWeek}, ${chatDay}. ${month}`;
     }
   }
-
 
   async updateChatArray(collection: CollectionReference, isPrivateChat: boolean, isThread: boolean) {
     const querySnapshot = await getDocs(collection);
