@@ -85,12 +85,12 @@ export class CreateAvatarComponent implements OnInit {
 
 
   public avatarImages = [
+    'assets/img/avatars/female1.png',
+    'assets/img/avatars/female2.png',
     'assets/img/avatars/male1.png',
     'assets/img/avatars/male2.png',
-    'assets/img/avatars/female1.png',
     'assets/img/avatars/male3.png',
     'assets/img/avatars/male4.png',
-    'assets/img/avatars/female2.png',
   ]
 
   private avatarImagesUrls = [
@@ -264,15 +264,6 @@ export class CreateAvatarComponent implements OnInit {
       this.isOpen = !this.isOpen;
     }, 2000);
   }
-
-
-
-
-
-
-
-
-
 }
 
 

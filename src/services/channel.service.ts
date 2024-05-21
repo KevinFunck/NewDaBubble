@@ -154,7 +154,6 @@ export class ChannelService {
     this.channelProfileImagesList = [];
     let channelDoc = this.getChannelDoc();
     let channelDocSnapshot = await getDoc(channelDoc);
-
     let channelUserList = channelDocSnapshot.data()?.['users']
     this.getUsersImages(channelUserList);
   }
@@ -229,11 +228,10 @@ export class ChannelService {
    */
   async addDefaultChannels() {
     const allgemeinChannelID = 'edRp0itnz76Y7viAjWYZ'
-    const officeChannelID = 'NEiKXyQjwWZUgTFJ2yjn'
-
+    const officeChannelID = 'C8GflKQ62BIWZkYOPjGB'
+   
     this.addUserToChannel(allgemeinChannelID)
     this.addUserToChannel(officeChannelID)
-    
   }
 
 /**
