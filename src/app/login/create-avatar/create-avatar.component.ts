@@ -106,7 +106,7 @@ export class CreateAvatarComponent implements OnInit {
   inputMail: string;
   username: string;
   isDisabled: boolean = false
-  avatarUrl: string
+  avatarUrl: string;
   public isOpen = false;
 
   ngOnInit(): void {

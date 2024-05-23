@@ -37,7 +37,6 @@ export class UpdateUserService {
     try {
       const userCredentail = await createUserWithEmailAndPassword(this.authService.auth, loginEmail, loginPassword)
     } catch (err: any) {
-
     }
   }
 
@@ -50,7 +49,6 @@ export class UpdateUserService {
   async updateUser(user: any, username: string, imgUrl: string,) {
     await this.updateUsername(user, username)
     await this.updatePhotoUrl(user, imgUrl)
-
   }
 
   /**

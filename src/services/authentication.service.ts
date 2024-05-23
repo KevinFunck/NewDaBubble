@@ -49,7 +49,6 @@ export class AuthenticationService {
     this.auth.useDeviceLanguage()
   }
 
-
   async googleLoginRedirect() {
 
     try {
@@ -70,6 +69,7 @@ export class AuthenticationService {
         // Email verification sent!
       });
   }
+
   /**
    * send email to reset password
    * @param email user email
@@ -83,7 +83,6 @@ export class AuthenticationService {
     }
   }
 
-
   /**
    * use this to singout user
    */
@@ -91,7 +90,6 @@ export class AuthenticationService {
     this.setOnlineStatus(false)
     await signOut(this.auth)
   }
-
 
   /**
    * Reacts on loginstate if user is logged in go to board else go to login
@@ -108,7 +106,6 @@ export class AuthenticationService {
     });
   }
 
-
   /**
    * set user online and redirect to board
    */
@@ -122,7 +119,6 @@ export class AuthenticationService {
     }
 
   }
-
 
   /**redirect to route:
    * @param url route
@@ -156,8 +152,6 @@ export class AuthenticationService {
     });
   }
 
-
-
   /**
    * Get the user ID for a given user email
    * @param usermail - Email of the user
@@ -173,7 +167,6 @@ export class AuthenticationService {
 
     return docID;
   }
-
 
   /**
    * get all users from firbase and push it into a array
@@ -196,14 +189,12 @@ export class AuthenticationService {
     });
   }
 
-
   getUserOnlineStatus(email: string) {
     let user = this.getUSerByEmail(email)
     if (user) {
       return user.online
     } else return false
   }
-
 
   getUSerByEmail(email: string) {
     let users
