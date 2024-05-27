@@ -114,7 +114,7 @@ export class AuthenticationService {
       this.redirectTo('/board', 3000)
 
     } else {
-      this.redirectTo('/board',0)
+      this.redirectTo('/board', 0)
       this.setOnlineStatus(true)
     }
 
@@ -136,6 +136,7 @@ export class AuthenticationService {
    * @param bool true /false
    */
   setOnlineStatus(bool: boolean) {
+    debugger;
     if (this.userList.length === 0) {
       this.userlist()
 
@@ -145,7 +146,8 @@ export class AuthenticationService {
   }
 
   updateOnlineStatus(bool: boolean) {
-    let docID = this.getUserId('') ?? ""; // Der leere String wird als Standardwert verwendet, wenn getUserId() undefined ist
+   
+    let docID = this.getUserId(''); // Der leere String wird als Standardwert verwendet, wenn getUserId() undefined ist
     let user = this.fireService.getUser(docID);
     this.fireService.updateUser(user, {
       online: bool
