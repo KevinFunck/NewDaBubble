@@ -98,7 +98,7 @@ export class AuthenticationService {
     onAuthStateChanged(this.auth, (user) => {
       // https://firebase.google.com/docs/reference/js/auth.user
       if (user) {
-        this.afterLogin()
+        this.afterLogin();
       } else {
         this.googlelogin = false
       }
@@ -136,7 +136,6 @@ export class AuthenticationService {
    * @param bool true /false
    */
   setOnlineStatus(bool: boolean) {
-    debugger;
     if (this.userList.length === 0) {
       this.userlist()
 
@@ -147,7 +146,7 @@ export class AuthenticationService {
 
   updateOnlineStatus(bool: boolean) {
    
-    let docID = this.getUserId(''); // Der leere String wird als Standardwert verwendet, wenn getUserId() undefined ist
+    let docID = this.getUserId('') ?? ""; // Der leere String wird als Standardwert verwendet, wenn getUserId() undefined ist
     let user = this.fireService.getUser(docID);
     this.fireService.updateUser(user, {
       online: bool
@@ -196,6 +195,7 @@ export class AuthenticationService {
     if (user) {
       return user.online
     } else return false
+    
   }
 
   getUSerByEmail(email: string) {

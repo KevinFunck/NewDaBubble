@@ -165,6 +165,7 @@ export class CreateAvatarComponent implements OnInit {
    * creates the Account and uploads all needed Data
    */
   async createAccount() {
+    
     if (this.storageService.imageUrl.length > 0) {
       await this.createUserWithImage();
     } else {
@@ -177,6 +178,7 @@ export class CreateAvatarComponent implements OnInit {
     }
   }
 
+
   /**
  * creates a user with default avatar image
  */
@@ -184,6 +186,7 @@ export class CreateAvatarComponent implements OnInit {
     let index = this.getUrlIndex()
     let url = this.avatarImagesUrls[index!]
     let donwloadUrl = await this.storageService.getUrl(url)
+   
     await this.createUser(donwloadUrl)
   }
 

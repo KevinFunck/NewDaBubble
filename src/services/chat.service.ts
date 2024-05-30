@@ -340,25 +340,6 @@ export class ChatService {
     await this.updateChatArray(threads, false, true);
     await this.updateChatArray(privateChats, true, false)
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

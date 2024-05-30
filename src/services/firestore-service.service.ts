@@ -77,6 +77,7 @@ export class FirestoreServiceService {
   async addUser() {
     let user = await addDoc(collection(this.firestore, 'users'), this.user.toJSON());
     return user.id
+
   }
 
   /**
