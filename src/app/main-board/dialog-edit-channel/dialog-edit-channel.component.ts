@@ -16,7 +16,6 @@ import { BoardHeaderComponent } from '../board-header/board-header.component';
   imports: [MatIconModule, CommonModule, FormsModule, DialogChatUserlistComponent, BoardHeaderComponent]
 })
 export class DialogEditChannelComponent implements OnInit {
-
   channelName!: string
   description!: string
   username!: string
@@ -32,27 +31,21 @@ export class DialogEditChannelComponent implements OnInit {
   ) {
     this.isHovering = false
     this.isHovering2 = false
-
-
   }
-
 
   async ngOnInit(): Promise<void> {
     await this.dialogUserlist.displayNames()
   }
-
 
   async updateName() {
     await this.updateChannel('name', this.channelName);
     this.channelService.channelName = this.channelName
   }
 
-
   async updateDescription() {
     await this.updateChannel('description', this.description);
     this.channelService.channelDescription = this.description
   }
-
 
   async updateChannel(field: string, value: string) {
     if (!value) {
@@ -62,12 +55,10 @@ export class DialogEditChannelComponent implements OnInit {
     this.updateChannelData(field, value)
   }
 
-
   showError() {
     alert('Es ist ein Fehler unterlaufen, Channel konnte nicht bearbeitet werden')
     this.closeEditWindowChannel();
   }
-
 
   async updateChannelData(field: string, value: string) {
     const id = this.channelService.getChannelDoc();

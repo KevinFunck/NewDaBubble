@@ -66,7 +66,6 @@ import { DataService } from '../create-account/data.service';
 export class CreateAvatarComponent implements OnInit {
   @ViewChild('profileImg') profileImg!: ElementRef;
 
-
   constructor(public updateUserService: UpdateUserService,
     public storageService: StorageService,
     private authService: AuthenticationService,
@@ -82,7 +81,6 @@ export class CreateAvatarComponent implements OnInit {
     this.avatarUrl = ''
 
   }
-
 
   public avatarImages = [
     'assets/img/avatars/female1.png',
@@ -114,7 +112,6 @@ export class CreateAvatarComponent implements OnInit {
 
   }
 
-
   /**
    *shows the right name
    */
@@ -127,7 +124,6 @@ export class CreateAvatarComponent implements OnInit {
       this.authService.redirectTo('/createaccount', 100)
   }
 
-
   /**
    * uploads the Image to the storage and caches the url in a variable
    */
@@ -137,7 +133,6 @@ export class CreateAvatarComponent implements OnInit {
     let url = await this.storageService.getStorageUrl(path)
     this.storageService.storageImgUrl = url
   }
-
 
   /**
    * Displays the avatar you selected
@@ -149,7 +144,6 @@ export class CreateAvatarComponent implements OnInit {
     this.avatarUrl = url!
   }
 
-
   /**
    * resets all variables
    */
@@ -159,7 +153,6 @@ export class CreateAvatarComponent implements OnInit {
     this.inputPassword = ''
     this.storageService.resetData()
   }
-
 
   /**
    * creates the Account and uploads all needed Data
@@ -178,7 +171,6 @@ export class CreateAvatarComponent implements OnInit {
     }
   }
 
-
   /**
  * creates a user with default avatar image
  */
@@ -189,7 +181,6 @@ export class CreateAvatarComponent implements OnInit {
    
     await this.createUser(donwloadUrl)
   }
-
 
   /**
    * create User with self uploaded image
@@ -218,7 +209,6 @@ export class CreateAvatarComponent implements OnInit {
     }
   }
 
-
   /**
    * Handels the error of creating an Account
    * @param error error form the createAccount
@@ -231,7 +221,6 @@ export class CreateAvatarComponent implements OnInit {
     }, 2300);
   }
 
-
   /**
    * Subscribes the userid of the currentUser
    * @param donwloadUrl url for the ProfileImage
@@ -239,7 +228,6 @@ export class CreateAvatarComponent implements OnInit {
   subscribeUserId(donwloadUrl: string) {
     this.firestore.subUserID(this.dataService.email, donwloadUrl);
   }
-
 
   /**
    * Get the index number of the right url
@@ -255,7 +243,6 @@ export class CreateAvatarComponent implements OnInit {
     }
     return 0;
   }
-
 
   /**
    * toggle animation

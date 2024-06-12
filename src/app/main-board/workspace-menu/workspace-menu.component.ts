@@ -84,7 +84,6 @@ export class WorkspaceMenuComponent {
 
   ngOnDestroy(): void {
     this.channelService.unsubchannel
-
   }
 
   showProfil(name:string, mail:string, img:string){
@@ -307,6 +306,4 @@ export class WorkspaceMenuComponent {
       this.lookingFor = '';
     }
   }
-
-
 }

@@ -59,7 +59,6 @@ export class ThreadWindowComponent {
     this.openDialog();
   }
 
-
   openDialog() {
     this.dialog.open(DialogProfileViewComponent, {
       panelClass: 'profile-view-dialog-responsive',

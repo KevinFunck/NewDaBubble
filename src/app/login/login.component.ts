@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     this.authService.userlist()
   }
 
-
   // if you logged in and you return back somehow to the login window. You will be logged out automaticly
   async logutIfUserIsLoggedIn() {
     if (this.authService.auth.currentUser !== null) {
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit {
 
     }
   }
-
 
   /**
    * Loginlogic
@@ -75,7 +73,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   /**
    *Log the user into the Firebase with email and passwort 
    */
@@ -92,7 +89,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   /**
    * login guest account with preset Logindata
    */
@@ -102,7 +98,6 @@ export class LoginComponent implements OnInit {
     this.loginstatus = true
 
   }
-
 
   animation() {
     let body = document.getElementsByTagName('body')[0];

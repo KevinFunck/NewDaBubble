@@ -52,7 +52,6 @@ export class DialogEditProfileComponent implements OnInit {
     private threadService: ThreadService
   ) {
 
-
   }
 
   ngOnInit(): void {
@@ -167,7 +166,6 @@ export class DialogEditProfileComponent implements OnInit {
     this.isOpen = false
   }
 
-
   /**
    * toggle animation
    */
@@ -190,13 +188,10 @@ export class DialogEditProfileComponent implements OnInit {
     await this.userService.changeAllProfileImgs(this.chatService.allChats, 'private')
   }
 
-
   async setNewNamesOnPosts() {
     await this.chatService.getAllChats()
     await this.userService.changeAllUserNames(this.chatService.allChats, 'chat')
     await this.userService.changeAllUserNames(this.chatService.allChats, 'thread')
     await this.userService.changeAllUserNames(this.chatService.allChats, 'private')
   }
-
-
 }
